@@ -1,0 +1,22 @@
+<ul class="media-list">
+  <% tasks.each do |task| %>
+    <li class="media">
+      <div class="media-body">
+        <div>
+          <span class="text-muted">posted at <%= task.created_at %></span>
+        </div>
+        <div>
+          <p>タスク[<%= task.content %>]</p>
+          <p>ステータス[<%= task.status %>]</p>
+          <div>
+          <% if current_user == task.user %>
+            <%= link_to "Delete", task, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+            <%= link_to "Edit", edit_task_path(task), class: 'btn btn-default btn-xs' %>
+          <% end %>
+        </div>
+        
+      </div>
+    </li>
+  <% end %>
+  <%= paginate tasks %>
+</ul>
